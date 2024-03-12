@@ -106,9 +106,10 @@ resource "aws_instance" "my_ec2_instance" {
   associate_public_ip_address = true
   user_data = <<-EOF
               #!/bin/bash
-              sudo yum update -y
-              sudo amazon-linux-extras install nginx1.12 -y
-              sudo service nginx start
+              sudo apt-get update -y
+              sudo apt-get install -y nginx
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
               EOF
   tags = {
     Name = "${var.tag_name}-VM"
